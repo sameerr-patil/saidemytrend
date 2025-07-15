@@ -21,7 +21,7 @@ pipeline {
                 script {
                     def scannerHome = tool 'sam-sonarqube-scanner'
 
-                    withSonarQubeEnv('sam-sonarqube-server') {
+                    withSonarQubeEnv('sam-sonarqube--server') {
                         sh "${scannerHome}/bin/sonar-scanner"
                     }
                 }
