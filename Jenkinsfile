@@ -6,7 +6,7 @@ pipeline {
     }
 
     tools {
-        maven 'Maven 3.9.6' // Optional if not already on PATH
+        maven 'M2_home' 
     }
 
     stages {
