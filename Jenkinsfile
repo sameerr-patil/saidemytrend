@@ -1,30 +1,31 @@
 pipeline {
     agent any
+
     environment {
         PATH = "/opt/maven/bin:$PATH"
     }
 
-    stages {
+    tools {
+        maven 'Maven 3.9.6' // Optional if not already on PATH
+    }
 
-        stage("build") {
+    stages {
+        stage('Build') {
             steps {
                 sh 'mvn clean deploy'
             }
         }
 
         stage('SonarQube analysis') {
-            environment {
-                scannerHome = tool 'sam-sonarqube-scanner'
-            }
-            
             steps {
-                withSonarQubeEnv('sam-sonarqube-server') {
-                    
-                    sh "${scannerHome}/bin/sonar-scanner"
+                script {
+                    def scannerHome = tool 'sam-sonarqube-scanner'
 
+                    withSonarQubeEnv('sam-sonarqube-server') {
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
                 }
             }
-         }
-     }
+        }
+    }
 }
-
