@@ -22,7 +22,7 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('sam-sonarqube-server') {
+                withSonarQubeEnv('sam-sonarqube--server') {
                     sh """
                         ${scannerHome}/bin/sonar-scanner \
                         -Dsonar.projectKey=sam01-key-saidemytrend \
